@@ -75,7 +75,7 @@
     }
 
     .chips {
-      margin-bottom: 14px;
+      margin-bottom: 4px;
     }
 
     .chip {
@@ -108,33 +108,6 @@
       color: #bfdbfe;
     }
 
-    select {
-      width: 100%;
-      padding: 10px;
-      border-radius: 10px;
-      background: #020617;
-      color: #e5e7eb;
-      border: 1px solid #334155;
-      font-size: 14px;
-      margin-bottom: 10px;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      border-radius: 12px;
-      border: none;
-      background: linear-gradient(135deg, #22c55e, #16a34a);
-      color: #020617;
-      font-weight: 700;
-      font-size: 14px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      transform: translateY(-2px);
-    }
-
     a.place-link {
       text-decoration: none;
       color: inherit;
@@ -154,7 +127,8 @@
 
   <h1>WaitLess ⏱️</h1>
   <div class="subtitle">
-    See when to go — not when places open.
+    Live estimated crowd and wait time based on place type and time of day.  
+    (Demo auto-sensing – no manual updates needed.)
   </div>
 
   <div class="places">
@@ -164,18 +138,16 @@
 
       {% if wait <= 10 %}
         {% set status = "green" %}
-        {% set text = "Best time to go" %}
+        {% set text = "Great time to go" %}
       {% elif wait <= 30 %}
         {% set status = "yellow" %}
         {% set text = "Moderate wait" %}
       {% else %}
         {% set status = "red" %}
-        {% set text = "Avoid if possible" %}
+        {% set text = "Heavy rush" %}
       {% endif %}
 
       <div class="card">
-
-        <!-- ✅ CLICKABLE TITLE ONLY -->
         <a href="/place/{{ place.id }}" class="place-link">
           <div class="place-category">{{ place.category }}</div>
           <div class="place-name">{{ place.name }}</div>
@@ -189,29 +161,13 @@
           <span class="chip">Base: {{ place.base_wait }} min</span>
           <span class="chip best-time">Best time: {{ place.best_time }}</span>
         </div>
-
-        <!-- ✅ FORM NOW WORKS -->
-        <form method="post" action="/update">
-          <input type="hidden" name="place_id" value="{{ place.id }}">
-
-          <select name="crowd_level">
-            <option value="1">1 — Very Low</option>
-            <option value="2">2 — Low</option>
-            <option value="3">3 — Normal</option>
-            <option value="4">4 — High</option>
-            <option value="5">5 — Insane</option>
-          </select>
-
-          <button type="submit">Update Live Status</button>
-        </form>
-
       </div>
     {% endfor %}
 
   </div>
 
   <div class="footer">
-    Crowd intelligence • Smart wait prediction • Real-time updates
+    Crowd intelligence • Smart wait prediction • Auto-estimated queues
   </div>
 
 </div>
