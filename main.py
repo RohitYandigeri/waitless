@@ -107,7 +107,7 @@ async def home(request: Request):
     enriched_places = []
 
     for p in PLACES:
-        live_crowd = get_live_crowd_level(place)
+        live_crowd = get_live_crowd_level(p)
         est_wait = calculate_wait_time(p["base_wait"], live_crowd)
 
         # Save auto sample to history (so ML has data)
