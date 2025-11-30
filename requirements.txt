@@ -4,3 +4,5 @@ jinja2
 scikit-learn
 numpy
 python-multipart
+requests
+python-dotenv
